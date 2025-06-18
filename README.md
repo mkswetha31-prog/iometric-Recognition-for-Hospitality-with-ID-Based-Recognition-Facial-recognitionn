@@ -1,2 +1,2 @@
-# iometric-Recognition-for-Hospitality-with-ID-Based-Recognition-Facial-recognitionn
+# Biometric-Recognition-for-Hospitality-with-ID-Based-Recognition-Facial-recognitionn
 The project titled "Biometric Recognition for Hospitality with ID-Based Recognition" aims to modernize guest verification in the hospitality sector using biometric technologies. It integrates facial recognition, fingerprint scanning, and ID-based verification to identify and authenticate guests quickly and securely. 
