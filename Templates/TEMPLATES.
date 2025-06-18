@@ -1,0 +1,790 @@
+//HOME.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HealthCare Portal - Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #0056b3;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 20px 35px;
+      font-size: 20px;
+      display: block;
+    }
+
+    nav a:hover {
+      background-color: #003f7f;
+    }
+
+    .content {
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 25px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to HealthCare Biometric System</h1>
+  </header>
+
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    <a href="{{ url_for('services') }}">Services</a>
+    <a href="{{ url_for('biometric_medical_report') }}">Biometric Medical Report</a>
+    <a href="{{ url_for('matchface') }}">Face Match</a>
+    <a href="{{ url_for('hospital') }}">Hospital Records</a>
+    <a href="{{ url_for('upload_report') }}">Upload Patients</a>
+    <a href="{{ url_for('view_patients') }}">View Patients</a>
+    <a href="{{ url_for('view_report') }}">View Report</a>
+    <a href="{{ url_for('biometricaccess') }}">Biometric Access</a>
+  </nav>
+
+  <div class="content">
+    <h2>Smart Healthcare Through Biometrics</h2>
+    <p>Manage patients, update medical records, and provide secure access using facial and fingerprint recognition.</p>
+    <p>Click the links above to explore the system features.</p>
+  </div>
+
+  <footer>
+    &copy; 2025 HealthCare System | All Rights Reserved
+  </footer>
+
+</body>
+</html>
+*//ABOUT.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Health Beacon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #0073e6;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>About Us</h2>
+        <p>This app leverages biometric authentication (iris, fingerprint, or facial recognition) to securely retrieve the health records of registered users in emergency situations.</p>
+    </div>
+
+</body>
+</html>
+
+*//BIOMETRICACCESS.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Biometric Access - Register Patient</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9fb;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #007bff;
+    }
+    form {
+      display: inline-block;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    input, select {
+      display: block;
+      width: 300px;
+      padding: 10px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .camera-box {
+      position: relative;
+      width: 320px;
+      height: 240px;
+      margin: 10px auto;
+      border: 2px solid #007bff;
+    }
+    video {
+      width: 320px;
+      height: 240px;
+    }
+    button {
+      padding: 10px 25px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Biometric Access - Patient Registration</h2>
+
+  <form id="patientForm" method="POST" action="/submit">
+    <input type="text" name="name" placeholder="Name" required />
+    <input type="number" name="age" placeholder="Age" required />
+    <input type="date" name="dob" required />
+    <input type="text" name="id" placeholder="ID Card" required />
+    <input type="text" name="aadhaar" placeholder="Aadhaar Number" required />
+    <input type="text" name="pan" placeholder="PAN Number" required />
+    <input type="text" name="diseases" placeholder="Diseases" required />
+    
+    <select name="blood" required>
+      <option value="">Select Blood Group</option>
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+    </select>
+
+    <div class="camera-box">
+      <video id="video" autoplay></video>
+    </div>
+
+    <input type="hidden" name="photo" id="photo" />
+
+    <button type="button" onclick="capturePhoto()">📸 Capture</button>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const video = document.getElementById('video');
+    const photoInput = document.getElementById('photo');
+
+    // Start camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(error => {
+        alert('Camera access denied!');
+      });
+
+    function capturePhoto() {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const imageData = canvas.toDataURL('image/jpeg');
+      photoInput.value = imageData;
+
+      alert('Photo captured and ready for submission!');
+    }
+  </script>
+</body>
+</html>
+
+*//SERVICE.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Services - BioSync</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0073e6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #005bb5;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 16px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .service-box {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .service-box h2 {
+      color: #0073e6;
+      margin-bottom: 10px;
+    }
+    .service-box p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .service-box a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .service-box a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background: #333;
+      color: #ccc;
+      padding: 20px;
+      text-align: center;
+    }
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .login-box {
+      margin: 20px auto;
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .login-box input[type="submit"] {
+      background: #0073e6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .login-box input[type="submit"]:hover {
+      background: #005bb5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <h1>BioSync</h1>
+    <p>Cutting-edge Biometric Solutions for Healthcare</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="registration.html">Registration</a>
+    <a href="biosync.html">BioSync</a>
+    <a href="login.html">Login</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Our Services Section -->
+    <section>
+      <h2>Our Services</h2>
+      <p>We offer advanced biometric solutions for secure identity verification, fraud prevention, and efficient data management in healthcare, ensuring accuracy, privacy, and seamless access to information.</p>
+    </section>
+
+    <!-- BioSync Cares -->
+    <div class="service-box">
+      <h2>BioSync Cares</h2>
+      <p>BioSync Cares securely verifies identities using biometric technology, prevents fraud, ensures accurate patient data management, and enhances privacy and efficiency in healthcare services.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <!-- Security Storage -->
+    <div class="service-box">
+      <h2>Security Storage</h2>
+      <p>The data ensures encrypted, tamper-proof biometric information, safeguarding privacy, preventing unauthorized access, and maintaining data integrity for reliable healthcare management.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <!-- Expert Support -->
+    <div class="service-box">
+      <h2>Expert Support</h2>
+      <p>Expert support of the data provides reliable assistance, secure management, and real-time monitoring to ensure accuracy, privacy, and smooth biometric operations in healthcare.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <!-- View All Services -->
+    <div class="service-box">
+      <h2>View All</h2>
+      <p>Discover our comprehensive range of biometric services designed to revolutionize healthcare security and data management.</p>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Address: Location | Call: 108 | Email: support108@gmail.com
+    </p>
+    <p>
+      Info: We provide cutting-edge biometric solutions designed to enhance security, ensure accurate identity verification, and streamline data management, preventing fraud while enabling secure access to sensitive information.
+    </p>
+    <p>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="services.html">Services</a> |
+      <a href="registration.html">Registration</a> |
+      <a href="biosync.html">BioSync</a> |
+      <a href="login.html">Login</a>
+    </p>
+    <p>© All Rights Reserved By Team Health Beacon</p>
+  </footer>
+
+</body>
+</html>
+
+**/
+MATCHFACE .HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Match Face - Capture & Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    #displayBox {
+      width: 320px;
+      height: 240px;
+      margin: 0 auto;
+      border: 3px solid #007bff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    video, img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #captureBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      width: 220px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin: 10px;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 18px;
+      color: green;
+    }
+    #thumbBox {
+      margin-top: 15px;
+    }
+    #thumbBox img {
+      width: 120px;
+      height: 90px;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <h2>Facial recognition- Capture & Search Patient By Id</h2>
+
+  <div id="displayBox">
+    <video id="video" autoplay playsinline></video>
+    <img id="capturedImage" style="display:none;" />
+  </div>
+
+  <button id="captureBtn">Capture Photo</button>
+
+  <!-- Captured photo thumbnail display below -->
+  <div id="thumbBox" style="display: none;">
+    <h4>Captured Photo:</h4>
+    <img id="thumbImage" src="" alt="Captured Thumbnail" />
+  </div>
+
+  <h3>OR Search Patient by ID</h3>
+  <input type="text" id="idInput" placeholder="Enter Patient ID Card" />
+  <button onclick="searchById()">Search</button>
+
+  <div id="result"></div>
+
+  <script>
+    const video = document.getElementById('video');
+    const capturedImage = document.getElementById('capturedImage');
+    const thumbImage = document.getElementById('thumbImage');
+    const thumbBox = document.getElementById('thumbBox');
+    const captureBtn = document.getElementById('captureBtn');
+    const resultDiv = document.getElementById('result');
+
+    async function startWebcam() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        alert('Webcam error: ' + err.message);
+      }
+    }
+
+    startWebcam();
+
+    captureBtn.addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL('image/png');
+
+      capturedImage.src = imageData;
+      video.style.display = 'none';
+      capturedImage.style.display = 'block';
+
+      // Show thumbnail below
+      thumbImage.src = imageData;
+      thumbBox.style.display = 'block';
+
+      fetch('/match-face', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData })
+      })
+      .then(res => res.json())
+      .then(data => displayResult(data))
+      .catch(err => {
+        resultDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+      });
+    });
+
+    function searchById() {
+      const id = document.getElementById('idInput').value.trim();
+      if (!id) {
+        alert("Please enter an ID number.");
+        return;
+      }
+
+      fetch('/search-by-id', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_card: id })
+      })
+      .then(response => response.json())
+      .then(data => displayResult(data))
+      .catch(err => {
+        resultDiv.innerHTML = `<p style="color:red;">Error: ${err}</p>`;
+      });
+    }
+
+    function displayResult(data) {
+      if (data.success) {
+        resultDiv.innerHTML = `
+          <h3>✅ Patient Found:</h3>
+          <p><strong>Name:</strong> ${data.patient.name}</p>
+          <p><strong>Age:</strong> ${data.patient.age}</p>
+          <p><strong>DOB:</strong> ${data.patient.dob}</p>
+          <p><strong>ID Card:</strong> ${data.patient.id_card}</p>
+          <p><strong>Blood Group:</strong> ${data.patient.blood}</p>
+        `;
+      } else {
+        resultDiv.innerHTML = `<p style="color:red;">${data.message || "❌ No patient found."}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
+
+*//UPLOADREPORT.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Medical Report (Camera & Local)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    #cameraBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video, img {
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      margin-top: 10px;
+      width: 300px;
+      height: 200px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Upload Medical Report (Camera & Local)</h2>
+<form id="reportForm" action="/upload" method="post" enctype="multipart/form-data">
+
+  <form id="reportForm" action="/upload" method="post" enctype="multipart/form-data">
+    <label>👤 Patient Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>📁 Upload Report from Local:</label><br>
+    <input type="file" name="report_image" accept="image/*"><br><br>
+
+    <label>📸 Capture Report from Camera:</label><br>
+    <div id="cameraBox">
+      <video id="video" autoplay></video>
+      <img id="capturedPhoto" src="#" style="display: none;" />
+    </div>
+
+    <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+    <input type="hidden" name="captured_data" id="capturedData"><br>
+
+    <button type="button" onclick="captureImage()">📸 Capture Report</button><br><br>
+
+    <button type="submit">✅ Submit Report</button>
+    <a href="/face"><button type="button">Go to Face Recognition</button></a>
+  </form>
+
+  <br><a href="/view">📂 View All Uploaded Reports</a>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const capturedPhoto = document.getElementById('capturedPhoto');
+
+    // Start camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(error => {
+        alert("Camera access failed: " + error.message);
+      });
+
+    // Capture image and show it in place of the video
+    function captureImage() {
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataURL = canvas.toDataURL('image/png');
+      document.getElementById('capturedData').value = dataURL;
+
+      video.style.display = "none";
+      capturedPhoto.src = dataURL;
+      capturedPhoto.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
+
+*//VIEWREPORT.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📄 View Medical Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 30px;
+    }
+    .report-box {
+      background: #fff;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+      width: 400px;
+    }
+    .report-box img {
+      max-width: 100%;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    .back-btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Uploaded Medical Report</h2>
+
+  <div class="report-box">
+    <h3>👤 Patient Name: {{ name }}</h3>
+
+    {% if image_path %}
+      <img src="{{ image_path }}" alt="Uploaded Report">
+    {% else %}
+      <p>No image uploaded.</p>
+    {% endif %}
+  </div>
+
+  <a class="back-btn" href="/">⬅️ Go Back</a>
+
+</body>
+</html>
+
+
